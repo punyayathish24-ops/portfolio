@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nina Chen · simple portfolio</title>
+  <!-- Google Font for a clean, modern look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600&display=swap" rel="stylesheet">
+  <style>
+    /* === RESET & BASE === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #0b2545;
+      line-height: 1.5;
+      padding: 1.5rem;
+    }
+
+    /* main card – keeps content centred and soft */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 15px 35px -10px rgba(0, 20, 30, 0.15);
+      overflow: hidden;
+      padding: 2.5rem 2rem;
+    }
+
+    /* === TYPOGRAPHY & COLORS === */
+    h1, h2, h3 {
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #0a2942;
+      margin-bottom: 0.25rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #1b3a5c;
+      border-bottom: 3px solid #b3d4e9;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      color: #2c4d6e;
+    }
+
+    /* === HEADER SECTION (flex column on mobile, row on larger) === */
+    .header-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      background: linear-gradient(145deg, #e6f0f9 0%, #ffffff 80%);
+      padding: 2rem 1.5rem;
+      border-radius: 2rem;
+    }
+
+    /* profile image */
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      box-shadow: 0 12px 22px -10px rgba(20, 60, 100, 0.3);
+      background: #cedfec; /* placeholder tint */
+    }
+
+    /* we use an inline SVG portrait (vector, lightweight) */
+    .profile-img svg {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #a2c3db;
+    }
+
+    .header-text {
+      max-width: 550px;
+    }
+
+    .header-text p {
+      font-size: 1.2rem;
+      color: #1f4662;
+      background: rgba(255,255,255,0.6);
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      display: inline-block;
+      margin-top: 0.5rem;
+      backdrop-filter: blur(4px);
+    }
+
+    /* === ABOUT SECTION === */
+    .about-section {
+      margin-bottom: 3.5rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .about-card {
+      background: #f0f6fd;
+      padding: 1.8rem;
+      border-radius: 1.5rem;
+      transition: transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+
+    .about-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .about-card p {
+      color: #1d3a5a;
+      font-size: 1.1rem;
+      margin-top: 0.75rem;
+    }
+
+    /* === CONTACT SECTION === */
+    .contact-section {
+      margin-bottom: 1rem;
+    }
+
+    .contact-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      background: #e3eef9;
+      padding: 2.2rem 2rem;
+      border-radius: 2rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.2rem;
+      background: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 60px;
+      box-shadow: 0 6px 12px rgba(32, 77, 109, 0.08);
+    }
+
+    .contact-item span:first-child {
+      font-size: 2rem;
+    }
+
+    .contact-item a {
+      text-decoration: none;
+      color: #0e3d5e;
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+      color: #022b49;
+    }
+
+    /* tiny map / extra visual */
+    .contact-note {
+      font-size: 1rem;
+      background: rgba(255,255,255,0.7);
+      padding: 1.2rem;
+      border-radius: 1.5rem;
+      color: #1d486b;
+      border-left: 5px solid #3282b8;
+    }
+
+    /* === RESPONSIVE (mobile first, then tablet/desktop) === */
+    @media (min-width: 640px) {
+      body { padding: 2rem; }
+      .container { padding: 3rem; }
+      .header-content {
+        flex-direction: row;
+        text-align: left;
+        justify-content: center;
+        gap: 3rem;
+      }
+      .profile-img {
+        width: 170px;
+        height: 170px;
+      }
+      .about-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .contact-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .contact-info {
+        min-width: 280px;
+      }
+    }
+
+    /* extra large screen fine-tuning */
+    @media (min-width: 900px) {
+      h1 { font-size: 3rem; }
+      .about-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* active / focus accessibility */
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid #1e6f9f;
+      outline-offset: 3px;
+    }
+
+    /* footer note (optional) */
+    .footnote {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #587b9c;
+      margin-top: 2.5rem;
+      border-top: 1px dashed #b3c9dd;
+      padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- HEADER with profile image and intro -->
+    <header class="header-content">
+      <div class="profile-img" aria-label="Profile portrait of Nina Chen">
+        <!-- SVG profile image – simple, colorful & responsive -->
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="abstract profile avatar">
+          <circle cx="50" cy="50" r="48" fill="#c1d9f0" stroke="#ffffff" stroke-width="3"/>
+          <circle cx="50" cy="40" r="16" fill="#f5e6d3" stroke="#8aaec2" stroke-width="2"/>
+          <!-- hair -->
+          <path d="M32 28 Q40 18 68 20 Q74 28 68 36 Q58 42 40 42 Q30 38 32 28" fill="#3b2e1e" opacity="0.9"/>
+          <circle cx="40" cy="36" r="3" fill="#1f2e3a"/>
+          <circle cx="60" cy="36" r="3" fill="#1f2e3a"/>
+          <!-- smile -->
+          <path d="M42 48 Q50 58 58 48" stroke="#a1412b" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <!-- top simple sweater -->
+          <rect x="28" y="56" width="44" height="20" fill="#2b5f8a" rx="10"/>
+        </svg>
+      </div>
+      <div class="header-text">
+        <h1>Punya TY</h1>
+        <p>✨ front-end &nbsp;·&nbsp; creative problem solver</p>
+        <p style="margin-top: 0.8rem; font-size: 1rem; background: none; padding: 0;">based in seattle · open for opportunities</p>
+      </div>
+    </header>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
+      <h2>📌 about</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>⚡ quick</h3>
+          <p>I craft clean, responsive interfaces with a focus on accessibility and performance. 3+ years of turning ideas into web experiences.</p>
+        </div>
+        <div class="about-card">
+          <h3>🎯 toolbox</h3>
+          <p>HTML5, CSS3, JavaScript, React, and always exploring. I believe in progressive enhancement and mobile-first design.</p>
+        </div>
+        <div class="about-card">
+          <h3>🌟 beyond code</h3>
+          <p>Collaborative, curious, and a strong believer in design systems. When I’m not coding, I sketch and hike.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+      <h2>📫 contact</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <div class="contact-item">
+            <span>📧</span>
+            <a href="mailto:ninachen1238@example.portfolio">punyaty2003@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <span>📱</span>
+            <a href="tel:+120655501233">+91 7019291175</a>
+          </div>
+          <div class="contact-item">
+            <span>🌐</span>
+            <a href="#" aria-label="portfolio website (placeholder)">punya.design</a>
+          </div>
+          <div class="contact-item">
+            <span>💼</span>
+            <span>github: @punyaty2003-netizens</span>
+          </div>
+        </div>
+        <div class="contact-note">
+          <p>📍 seattle, wa · remote friendly<br>🕒 typically reply within 24h<br>🤝 let’s grab a virtual coffee</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- small footer / extra contact info (still part of contact) -->
+    <div class="footnote">
+      ✦ simple portfolio – html5 & css3 ✦
+    </div>
+  </div>
+  <!-- no JavaScript — pure HTML/CSS, mobile ready -->
+</body>
+</html>
